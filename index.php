@@ -1,9 +1,3 @@
-<?php
-
-$test = "./resources/img/test.png"
-
-?>
-
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -11,46 +5,8 @@ $test = "./resources/img/test.png"
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="style.css">
     <title>Soundboard</title>
-
-    <style>
-        .sound-color-p{
-            background-color: #4D5560;
-        }
-
-        .sound-nav-links:hover{
-            border-bottom: solid #4CA560;
-        }
-        .sound-nav-links{
-            border:  solid transparent;
-        }
-
-
-
-        .circular--square {
-            position: absolute;
-            border-radius: 50%;
-            z-index: 2;
-            background: #4D5560;
-            border: 5px;
-            margin-left: -13px;
-            margin-top: -13px;
-
-        }
-
-        .sound-card-group
-        {
-            margin-left: auto;
-            margin-right: auto;
-            display: flex
-        }
-
-
-
-
-    </style>
-
 </head>
 <body>
 

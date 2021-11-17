@@ -1,3 +1,28 @@
+<?php
+
+if(isset($_POST) && isset($_FILES['file']['name'])) {
+    if (($_FILES['file']['name'] != "")) {
+// Where the file is going to be stored#
+        $target_dir = "resources/upload/img/";
+        $file = $_FILES['file']['name'];
+        $path = pathinfo($file);
+        $filename = $path['filename'];
+        $ext = $path['extension'];
+        $temp_name = $_FILES['file']['tmp_name'];
+        $path_filename_ext = $target_dir . $filename . "." . $ext;
+
+// Check if file already exists
+        if (file_exists($path_filename_ext)) {
+            die("Error");
+        } else {
+            move_uploaded_file($temp_name, $path_filename_ext);
+
+        }
+    }
+}
+?>
+
+
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -44,175 +69,60 @@
 
 
 <div class="container">
-
-    <div class="row">
-        <div class="sound-card-group">
-            <div class="mt-5 ml-3">
-                <img class="circular--square" src="resources/img/icon-profile.png" alt="Sound-card-profile-image" height="72" width="72"/>
-                <div class="card m-3 sound-card" style="width: 15rem; ">
-                    <div class="container">
-                        <img class="card-img-top" src="./resources/img/icon-sound.png" alt="Card image cap" width="226" height="140">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Author: Nico<br>
-                            Category: Lustig, Test
-                        </p>
-                        <div class="container text-center" >
-                            <button href="#" class="btn btn-primary">Edit</button>
-                            <button href="#" class="btn btn-primary">Play</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-5 ml-3">
-                <img class="circular--square" src="resources/img/icon-profile.png" alt="Sound-card-profile-image" height="72" width="72"/>
-                <div class="card m-3 sound-card" style="width: 15rem; ">
-                    <div class="container">
-                        <img class="card-img-top" src="./resources/img/icon-sound.png" alt="Card image cap" width="226" height="140">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Author: Nico<br>
-                            Category: Lustig, Test
-                        </p>
-                        <div class="container text-center" >
-                            <button href="#" class="btn btn-primary">Edit</button>
-                            <button href="#" class="btn btn-primary">Play</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-5 ml-3">
-                <img class="circular--square" src="resources/img/icon-profile.png" alt="Sound-card-profile-image" height="72" width="72"/>
-                <div class="card m-3 sound-card" style="width: 15rem; ">
-                    <div class="container">
-                        <img class="card-img-top" src="./resources/img/icon-sound.png" alt="Card image cap" width="226" height="140">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Author: Nico<br>
-                            Category: Lustig, Test
-                        </p>
-                        <div class="container text-center" >
-                            <button href="#" class="btn btn-primary">Edit</button>
-                            <button href="#" class="btn btn-primary">Play</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-5 ml-3">
-                <img class="circular--square" src="resources/img/icon-profile.png" alt="Sound-card-profile-image" height="72" width="72"/>
-                <div class="card m-3 sound-card" style="width: 15rem; ">
-                    <div class="container">
-                        <img class="card-img-top" src="./resources/img/icon-sound.png" alt="Card image cap" width="226" height="140">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Author: Nico<br>
-                            Category: Lustig, Test
-                        </p>
-                        <div class="container text-center" >
-                            <button href="#" class="btn btn-primary">Edit</button>
-                            <button href="#" class="btn btn-primary">Play</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="sound-card-group d-flex justify-content-center">
+        <div class="mt-5 ml-3 ">
+            <button type="button" class="btn" data-toggle="modal" data-target="#addSound">
+                <img class="circular--square p-2" src="resources/img/icon-add-sound.png" alt="Sound-card-profile-image" height=85" width="85"/>
+            </button>
         </div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="sound-card-group">
-            <div class="mt-5 ml-3">
-                <img class="circular--square" src="resources/img/icon-profile.png" alt="Sound-card-profile-image" height="72" width="72"/>
-                <div class="card m-3 sound-card" style="width: 15rem; ">
-                    <div class="container">
-                        <img class="card-img-top" src="./resources/img/icon-sound.png" alt="Card image cap" width="226" height="140">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Author: Nico<br>
-                            Category: Lustig, Test
-                        </p>
-                        <div class="container text-center" >
-                            <button href="#" class="btn btn-primary">Edit</button>
-                            <button href="#" class="btn btn-primary">Play</button>
-                        </div>
-                    </div>
+
+<div class="container">
+
+    <div class="modal fade" id="addSound" aria-labelledby="addSound" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add new Sound</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
 
-            <div class="mt-5 ml-3">
-                <img class="circular--square" src="resources/img/icon-profile.png" alt="Sound-card-profile-image" height="72" width="72"/>
-                <div class="card m-3 sound-card" style="width: 15rem; ">
-                    <div class="container">
-                        <img class="card-img-top" src="./resources/img/icon-sound.png" alt="Card image cap" width="226" height="140">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Author: Nico<br>
-                            Category: Lustig, Test
-                        </p>
-                        <div class="container text-center" >
-                            <button href="#" class="btn btn-primary">Edit</button>
-                            <button href="#" class="btn btn-primary">Play</button>
+                <div class="modal-body">
+
+                    <form action="index.php" method="post" enctype="multipart/form-data">
+                        <div class="form-row">
+
+                            <div class="col">
+                                <label for="sound_title">Sound Title</label>
+                                <input type="text" class="form-control" placeholder="Sound Title" id="sound_title" name="sound_title">
+                            </div>
+
+                            <div class="col">
+                                <label for="file">Sound Bild</label>
+                                <input type="file" class="form-control" id="sound_bild" name="file">
+                            </div>
+
                         </div>
-                    </div>
+                        <button type="submit"  name="Add" value="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+
                 </div>
-            </div>
 
-            <div class="mt-5 ml-3">
-                <img class="circular--square" src="resources/img/icon-profile.png" alt="Sound-card-profile-image" height="72" width="72"/>
-                <div class="card m-3 sound-card" style="width: 15rem; ">
-                    <div class="container">
-                        <img class="card-img-top" src="./resources/img/icon-sound.png" alt="Card image cap" width="226" height="140">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Author: Nico<br>
-                            Category: Lustig, Test
-                        </p>
-                        <div class="container text-center" >
-                            <button href="#" class="btn btn-primary">Edit</button>
-                            <button href="#" class="btn btn-primary">Play</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-5 ml-3">
-                <img class="circular--square" src="resources/img/icon-profile.png" alt="Sound-card-profile-image" height="72" width="72"/>
-                <div class="card m-3 sound-card" style="width: 15rem; ">
-                    <div class="container">
-                        <img class="card-img-top" src="./resources/img/icon-sound.png" alt="Card image cap" width="226" height="140">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Author: Nico<br>
-                            Category: Lustig, Test
-                        </p>
-                        <div class="container text-center" >
-                            <button href="#" class="btn btn-primary">Edit</button>
-                            <button href="#" class="btn btn-primary">Play</button>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Send message</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 
 
